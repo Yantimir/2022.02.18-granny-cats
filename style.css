@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ======= HEADER ======= */
+header {
+    width: 100%;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
+}
+.header__inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+.header__logo {
+    height: 50px;
+    padding: 0 20px;
+}
+.header__text {
+    font-family: "Comic Sans MS", sans-serif;
+    padding: 0 20px;
+}
+
+/* ======= CARD ======= */
+.main__card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.card__item {   
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    width: 300px;
+    padding: 30px;
+    margin: 25px;
+
+    box-sizing: border-box;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    cursor: pointer;
+    background: rgb(255, 255, 255);
+ 
+}
+.card__item:hover {
+    transform: scale(1.2);
+    transition: 0.4s ease-in-out;
+}
+.card__img {
+    height: 150px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background: center / cover no-repeat;
+    /* background-size: cover; */
+    opacity: .8;
+}
+.card__item h3{
+    margin-bottom: 5px;
+}
+
+/* ======= REATING ======= */
+.rating {
+    display: flex;
+}
+.rating img {
+    height: 15px;
+}
+
+/* ======= POPUP CATS ======= */
+.popup__cats{
+    /* display: none; */
+    box-sizing: border-box;
+    position: fixed;
+    left: calc(50vw - 350px);
+    top: calc(50vh - 200px);
+    width: 700px;
+    height: 350px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border: 1px solid rgb(0, 0, 0);
+}
+.popup__cats_active{
+    /* display: flex; */
+    transform: translateY(0) scale(100%);
+}
+.popup__img{
+    width: 100px;
+    height: 100px;
+}
+/* ======= FOOTER ======= */
+footer .container{
+    width: 100%;
+    height: 100px;
+    padding-left: 100px;
+    box-shadow:  0 0 5px 0 rgba(0, 0, 0, 0.4);
+    line-height: 4;
+}
