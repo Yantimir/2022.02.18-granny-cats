@@ -87,15 +87,24 @@ header {
     top: calc(50vh - 200px);
     width: 700px;
     /* height: 350px; */
+    box-shadow: 0 0 5px 0 #0004, 0 0 15px 0 #0004;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid rgb(184, 184, 184);  
 }
 .popup__cats_active{
     display: flex;
-    transform: translateY(0) scale(100%);
 }
-.popup__cats-close {
+.popup__cats_lightbox_active{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: 0.2s ease-in-out;
+}
+.popup__cats-close{
     position: absolute;
     top: 20px;
     right: 20px;
@@ -119,12 +128,12 @@ header {
 }
 .popup__text h2 {
     font-family: "Comic Sans MS", sans-serif;
-    color: rgb(70, 70, 70);
+    /* color: rgb(70, 70, 70); */
 }
 
 /* ======= FOOTER ======= */
 footer .container{
-    width: 100%;
+    /* width: 100%; */
     height: 100px;
     padding-left: 100px;
     box-shadow:  0 0 5px 0 rgba(0, 0, 0, 0.4);

@@ -1,7 +1,6 @@
 const main = document.querySelector(".main");
 const mainCard = document.querySelector(".main__card");
 
-
 /* ====== create CARD ====== */
 const createCardItem = function (dataCat) {
     let cardItem = `
@@ -42,21 +41,28 @@ for (let i = 0; i < cardItem.length; i++) {
     });
 }
 
-const closePopup = function () {
-    popupCats.classList.remove("popup__cats_active");
-}
-
 const popupCats = document.querySelector(".popup__cats");
+const popupCatsClose = document.querySelector(".popup__cats-close");
+const divLightBox = document.createElement("div"); // create div for lightbox
+divLightBox.classList.add("popup__cats_lightbox");
+popupCats.before(divLightBox);
+
+/* -- close popup -- */
+const closePopup = function () {
+    popupCats.classList.remove("popup__cats_active"); // close popup
+    divLightBox.classList.remove("popup__cats_lightbox_active"); // close lightbox
+}
+/* -- show popup -- */
 const showPopup = function (dataCat) {
-    popupCats.classList.add("popup__cats_active");
+    popupCats.classList.add("popup__cats_active"); // show popup
     popupCats.innerHTML = `
         <img class="popup__img" src="${dataCat.img_link}" alt="${dataCat.name}">
         <div class="popup__text">
             <h2>${dataCat.name}</h2>
+            <h3>${dataCat.age} лет</h3>
             <p>${dataCat.description}</p>
-            <div class="popup__cats-close"></div>
+            <div class="popup__cats-close" onclick="closePopup()"></div>
         </div>
     `;
+    divLightBox.classList.add("popup__cats_lightbox_active"); // show lightbox 
 }
-// showPopup(cats);
-popupCats.addEventListener("click", closePopup);
