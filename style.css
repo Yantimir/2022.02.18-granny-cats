@@ -79,25 +79,49 @@ header {
 
 /* ======= POPUP CATS ======= */
 .popup__cats{
-    /* display: none; */
+    /* display: flex; */
+    display: none;
     box-sizing: border-box;
     position: fixed;
     left: calc(50vw - 350px);
     top: calc(50vh - 200px);
     width: 700px;
-    height: 350px;
+    /* height: 350px; */
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     border: 1px solid rgb(0, 0, 0);
 }
 .popup__cats_active{
-    /* display: flex; */
+    display: flex;
     transform: translateY(0) scale(100%);
 }
-.popup__img{
-    width: 100px;
-    height: 100px;
+.popup__cats-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-image: url(img/close.png);
+    background-position: center 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
 }
+.popup__img{
+    width: calc(100% - 400px);
+    height: calc(100% - 65px);
+    padding: 30px;
+}
+.popup__text{
+    width: calc(100% - 400px);
+    height: calc(100% - 65px);
+    padding: 10px;
+}
+.popup__text h2 {
+    font-family: "Comic Sans MS", sans-serif;
+    color: rgb(70, 70, 70);
+}
+
 /* ======= FOOTER ======= */
 footer .container{
     width: 100%;

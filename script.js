@@ -1,6 +1,7 @@
 const main = document.querySelector(".main");
 const mainCard = document.querySelector(".main__card");
 
+
 /* ====== create CARD ====== */
 const createCardItem = function (dataCat) {
     let cardItem = `
@@ -33,13 +34,29 @@ function showRating(number) {
 }
 
 /* ====== POPUP ====== */
+const cardItem = document.querySelectorAll(".card__item");
+for (let i = 0; i < cardItem.length; i++) {
+    // console.log(cardItem[i]);
+    cardItem[i].addEventListener("click", function (event) {
+        showPopup(cats[i]);
+    });
+}
 
+const closePopup = function () {
+    popupCats.classList.remove("popup__cats_active");
+}
+
+const popupCats = document.querySelector(".popup__cats");
 const showPopup = function (dataCat) {
-    const popupCats = document.createElement("div");
-    popupCats.classList.add("popup__cats");
+    popupCats.classList.add("popup__cats_active");
     popupCats.innerHTML = `
         <img class="popup__img" src="${dataCat.img_link}" alt="${dataCat.name}">
+        <div class="popup__text">
+            <h2>${dataCat.name}</h2>
+            <p>${dataCat.description}</p>
+            <div class="popup__cats-close"></div>
+        </div>
     `;
-    main.after(popupCats);
 }
-showPopup(cats);
+// showPopup(cats);
+popupCats.addEventListener("click", closePopup);
