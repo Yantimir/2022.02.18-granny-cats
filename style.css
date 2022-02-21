@@ -5,20 +5,20 @@ body {
     font-size: 20px;
 }
 .container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
 /* ======= HEADER ======= */
 header {
     width: 100%;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
 }
 .header__inner{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
 }
 .header__logo {
     height: 50px;
@@ -26,13 +26,14 @@ header {
 }
 .header__text {
     font-family: "Comic Sans MS", sans-serif;
-    padding: 0 20px;
+    padding: 0 30px;
 }
 
 /* ======= CARD ======= */
 .main__card {
     display: flex;
     flex-wrap: wrap;
+    /* justify-content: space-between; */
     justify-content: center;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -54,7 +55,7 @@ header {
  
 }
 .card__item:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition: 0.4s ease-in-out;
 }
 .card__img {
@@ -62,7 +63,6 @@ header {
     margin-bottom: 20px;
     border-radius: 10px;
     background: center / cover no-repeat;
-    /* background-size: cover; */
     opacity: .8;
 }
 .card__item h3{
@@ -128,7 +128,6 @@ header {
 }
 .popup__text h2 {
     font-family: "Comic Sans MS", sans-serif;
-    /* color: rgb(70, 70, 70); */
 }
 
 /* ======= FOOTER ======= */
@@ -139,3 +138,4 @@ footer .container{
     box-shadow:  0 0 5px 0 rgba(0, 0, 0, 0.4);
     line-height: 4;
 }
+

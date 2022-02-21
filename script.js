@@ -1,46 +1,24 @@
 const main = document.querySelector(".main");
 const mainCard = document.querySelector(".main__card");
+const cardItem = document.querySelectorAll(".card__item");
 
-/* ====== create CARD ====== */
-const createCardItem = function (dataCat) {
-    let cardItem = `
-        <div class="card__item">
-            <div class="card__img" style="background-image: url(${dataCat.img_link})"></div>
-            <h3>${dataCat.name}</h3>
-            <p class="rating">${showRating(dataCat.rate)}</p>
-        </div>
-    `
-    mainCard.innerHTML += cardItem;
-}
-cats.forEach(dataCat => {
-    createCardItem(dataCat);
-});
-
-/* ====== show REATING ====== */
+/* ====== show REATING ========================================================== */
 function showRating(number) {
     let rating = "";
     let summaryRating = 10;
     let catFill = "<img src='img/cat-fill.svg' alt='catFill'>";
     let catStroke = "<img src='img/cat-stroke.svg' alt='catStroke'>";
     for (let i = 0; i < summaryRating; i++) {
-        if(i < number){
+        if (i < number) {
             rating += catFill;
-        }else{
+        } else {
             rating += catStroke;
         }
     }
     return rating;
 }
 
-/* ====== POPUP ====== */
-const cardItem = document.querySelectorAll(".card__item");
-for (let i = 0; i < cardItem.length; i++) {
-    // console.log(cardItem[i]);
-    cardItem[i].addEventListener("click", function (event) {
-        showPopup(cats[i]);
-    });
-}
-
+/* ====== POPUP ================================================================= */
 const popupCats = document.querySelector(".popup__cats");
 const popupCatsClose = document.querySelector(".popup__cats-close");
 const divLightBox = document.createElement("div"); // create div for lightbox
@@ -53,16 +31,51 @@ const closePopup = function () {
     divLightBox.classList.remove("popup__cats_lightbox_active"); // close lightbox
 }
 /* -- show popup -- */
-const showPopup = function (dataCat) {
+const showPopup = function (data) {
     popupCats.classList.add("popup__cats_active"); // show popup
     popupCats.innerHTML = `
-        <img class="popup__img" src="${dataCat.img_link}" alt="${dataCat.name}">
+        <img class="popup__img" src="${data.img_link}" alt="${data.name}">
         <div class="popup__text">
-            <h2>${dataCat.name}</h2>
-            <h3>${dataCat.age} лет</h3>
-            <p>${dataCat.description}</p>
+            <h2>${data.name}</h2>
+            <h3>${data.age} лет</h3>
+            <p>${data.description}</p>
             <div class="popup__cats-close" onclick="closePopup()"></div>
         </div>
     `;
     divLightBox.classList.add("popup__cats_lightbox_active"); // show lightbox 
 }
+
+/* ===== функция TEMPLATE клон карточки =========================================*/
+const template = function (data) {
+    const templateCat = document.querySelector("#card-cat-template").content;
+
+    // получение фрагмента
+
+    // имя кота
+    const newCatCard = templateCat.querySelector(".card__item").cloneNode(true);
+    const catName = newCatCard.querySelector('h3');
+    catName.textContent = data.name;
+
+    // фото кота
+    const imgTemplate = newCatCard.querySelector(".card__img");
+    imgTemplate.style.backgroundImage = `url(${data.img_link})`;
+
+    // рейтинг кота
+    const ratingTemplate = newCatCard.querySelector(".rating");
+    ratingTemplate.innerHTML = showRating(data.rate);
+
+    // POPUP при клике на карточку
+    newCatCard.addEventListener("click", function (e) {
+        showPopup(data);
+    });
+
+    // дубликат узла
+    mainCard.append(newCatCard);
+}
+
+/* ===== данные в карточку =====================================================*/
+api.getAllCats().then(dataCat => {
+    dataCat.data.forEach(item => {
+        template(item);
+    });
+});
