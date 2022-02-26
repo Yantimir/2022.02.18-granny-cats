@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бабуленькины котики</title>
-    <!-- <script src="cats.js"></script> dataCat -->
-    <link rel="stylesheet" href="style.css">
+    <!-- <script src="cats.js"></script> -->
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js" defer></script>
 </head>
 
 <body>
@@ -24,6 +25,15 @@
     </header>
     <!-- /header ------------------------------------------------------->
 
+    <div class="control">
+        <div class="container">
+            <div class="control__item">
+                <button class="button button-add-cat" type="button">Добавить котика</button>
+                <button class="button button-overwriting-local-storage" type="button">Overwriting localStorage</button>
+            </div>
+        </div>
+    </div>
+
     <!-- MAIN ---------------------------------------------------------->
     <main class="main">
         <div class="container">
@@ -35,28 +45,61 @@
     <!-- /main --------------------------------------------------------->
 
     <!-- FOOTER -------------------------------------------------------->
+
     <footer class="footer">
         <div class="container">
-            ©2022 All rights reserved
+            <p>©2022 All rights reserved</p>
         </div>
     </footer>
+
     <!-- /footer ------------------------------------------------------->
 
     <!-- POPUP CATS ---------------------------------------------------->
-    <div class="popup__cats"></div>
+    <div class="popup popup_type_cats-info">
+        <div class="popup__container">
+            <img class="popup__img" alt="котик">
+            <div class="popup__title">
+                <h2 class="popup__text"></h2>
+                <h3 class="popup__cat-age"></h3>
+                <p class="popup__cat-description"></p>
+                <p class="popup__cat-id"></p>
+            </div>
+            <div class="popup__img-close"></div>
+            <button class="button popup__change-form__send-button" type="submit">Изменить</button>
+            <button class="button popup__delete-form__send-button" type="button">Удалить</button>
+        </div>
+    </div>
+
+    <div class="popup popup_add_cat-info">
+        <div class="popup__container">
+            <form class="popup__add-form" name="add-form">
+                <input class="popup__add-form__input" type="text" name="add-name" placeholder="Введите имя котика">
+                <input class="popup__add-form__input" type="text" name="add-age" placeholder="Введите возраст котика">
+                <input class="popup__add-form__input" type="text" name="add-rate"
+                    placeholder="Введите рейтинг котика < 10">
+                <input class="popup__add-form__input" type="text" name="add-description"
+                    placeholder="Введите информацию о котике">
+                <div class="popup__add-form__button">
+                    <button class="button popup__add-form__send-button" type="submit">Отправить</button>
+                </div>
+            </form>
+            <div class="popup__img-close"></div>
+        </div>
+    </div>
+    <!-- /popup cats --------------------------------------------------->
 
     <!--TEMPLATE-------------------------------------------------------->
     <template id="card-cat-template">
         <div class="card__item">
-            <div class="card__img" style="background-image: url()"></div>
+            <div class="card__img"></div>
             <h3></h3>
-            <p class="rating"></p>
-        </div>
+            <p class="cat-rating"></p>
+            <p class="cat-id"></p>
+        </div><button class="button popup__add-form__send-button" type="button"></button>
     </template>
 
-    <script src="Api.js"></script>
-    <script src="script.js"></script>
-
+    <script src="./js/Api.js" defer></script>
+    <script src="./js/script.js" defer></script>
 </body>
 
 </html>
