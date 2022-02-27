@@ -6,22 +6,21 @@ const main = document.querySelector(".main");
 const mainCard = main.querySelector(".main__card");
 const templateCat = document.querySelector("#card-cat-template");
 
-const popupCats = document.querySelector(".popup_type_cats-info");
-const popupCatImage = popupCats.querySelector(".popup__img");
-const popupText = popupCats.querySelector(".popup__text");
-const popupCatAge = popupCats.querySelector(".popup__cat-age");
-const popupCatDescription = popupCats.querySelector(".popup__cat-description");
-const popupCatId = popupCats.querySelector(".popup__cat-id");
+const wrapperPopup = document.querySelector(".wrapper__popup");
+const popupCats = wrapperPopup.querySelector(".popup_type_cats-info");
+const popupCatImage = wrapperPopup.querySelector(".popup__cat-img");
+const popupCatName = wrapperPopup.querySelector(".popup__cat-name");
+const popupCatAge = wrapperPopup.querySelector(".popup__cat-age");
+const popupCatDescription = wrapperPopup.querySelector(".popup__cat-description");
+const popupCatId = wrapperPopup.querySelector(".popup__cat-id");
+
+const closePopupCat = wrapperPopup.querySelector(".popup__img-close");
+
 const popupAddCat = document.querySelector(".popup_add_cat-info");
-const closePopupCats = document.querySelector(".popup__img-close");
 
 const btnOverwritingLocalStorage = document.querySelector(".button-overwriting-local-storage");
 const btnAddCat = document.querySelector(".button-add-cat");
 const btnDeleteCat = document.querySelector(".popup__delete-form__send-button");
-
-
-
-
 
 /* ====== show REATING ========================================================== */
 function showRating(number) {
@@ -44,22 +43,31 @@ function showRating(number) {
 function openPopup(popup) {
     popup.classList.add("popup_opened");
 }
+
 // функция закрытия POPUP
-function closePopup() {
+function closePopup(e) {
     const popupActive = document.querySelector(".popup_opened");
     if (popupActive) {
         popupActive.classList.remove("popup_opened");
     }
 }
-// функция слушатель
-// function handleClosePopup() {
-//     closePopup(popupCats); 
-//     closePopup(popupAddCat);
-// }
 
-function handleClickButtonAddCat() {
+// функция слушатель
+function handleClosePopup() {
+    closePopup(popupCats);
+}
+
+function handleClickBtnAddCat() {
     openPopup(popupAddCat);
 }
+
+function handleClickCloseBtn(e) {
+    if (e.target.classList.contains("popup__img-close")) {
+        closePopup();
+    }
+}
+
+
 
 /* ===== функция template клон карточки =========================================*/
 function createCardCat(dataCat) {
@@ -75,9 +83,8 @@ function createCardCat(dataCat) {
     // рейтинг кота
     ratingCatCard.innerHTML = showRating(dataCat.rate);
 
-
     function handleClickCatImage() {
-        popupText.innerHTML = dataCat.name;
+        popupCatName.innerHTML = dataCat.name;
         popupCatImage.src = dataCat.img_link;
         popupCatAge.textContent = dataCat.age + " лет";
         popupCatDescription.textContent = dataCat.description;
@@ -85,8 +92,10 @@ function createCardCat(dataCat) {
         openPopup(popupCats);
     }
     newCatCard.addEventListener("click", handleClickCatImage);
+
     return newCatCard;
 }
+
 // функция добавления карточки
 function createCardToMainCard(elementNode, container) {
     container.append(elementNode);
@@ -97,80 +106,53 @@ function createCardToMainCard(elementNode, container) {
 function setLocalStorage(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
+
 // функция получения localStorage
 const getLocalStorage = function (key) {
     return JSON.parse(localStorage.getItem(key));
 }
+
 // функция перезаписи localStorage
-function overwritingLocalStorage(e) {
-    e.preventDefault();
+function overwritingLocalStorage() {
     localStorage.clear();
-    api.getAllCats().then(dataCat => {
-        setLocalStorage("cats", dataCat.data);
-    });
+    mainCard.innerHTML = "";
+    getEveryCats();
 }
-// function overwritingLocalStorage(e, data) {
-//     if (e.target) {
-//         localStorage.clear();
-//         setLocalStorage("cats", data);
-//     }
-// }
 
 /* ===== данные в карточку =====================================================*/
-// if (!localStorage.getItem("cats")) {
-//     api.getAllCats().then(dataCat => {
-//         setLocalStorage("cats", dataCat.data);
-//         dataCat.data.forEach((item) => {
-//             const newCat = createCardCat(item);
-//             createCardToMainCard(newCat, mainCard);
-//         });
-//     });
-// } else {
-//     let dataLocalStorage = getLocalStorage("cats");
+function getEveryCats() {
+    api.getAllCats().then(({ data }) => {
+        // set localStorage
+        setLocalStorage("cats", data);
+        // templateCardCat    
+        data.forEach((item) => {
+            const newCat = createCardCat(item);
+            createCardToMainCard(newCat, mainCard);
+        });
+    });
+}
 
-//     dataLocalStorage.forEach((item) => {
-//         const newCat = createCardCat(item);
-//         createCardToMainCard(newCat, mainCard);
-//     });
-// }
+/* =====  функция удаления карточки кота ======================================*/
+function deleteFormCat() {
+    api.deleteCat(popupCatId.textContent);
+    // newCatCard.remove();
+    overwritingLocalStorage();
+    closePopup();
+}
 
-api.getAllCats().then(dataCat => {
-    // templateCardCat
-    dataCat.data.forEach((item) => {
+wrapperPopup.addEventListener("click", handleClickCloseBtn);
+btnOverwritingLocalStorage.addEventListener("click", overwritingLocalStorage);
+btnAddCat.addEventListener("click", handleClickBtnAddCat);
+btnDeleteCat.addEventListener("click", deleteFormCat);
+
+
+if (!localStorage.getItem("cats")) {
+    getEveryCats();
+} else {
+    let getDataForLocalStorage = getLocalStorage("cats");
+    getDataForLocalStorage.forEach((item) => {
         const newCat = createCardCat(item);
         createCardToMainCard(newCat, mainCard);
     });
-
-    // localStorage
-    if (!localStorage.getItem("cats")) {
-        setLocalStorage("cats", dataCat.data); // set localStorage
-    }
-    // function getDataForLocalStorage(callback, dataCat) {
-    //     let dataLocalStorage = JSON.stringify(dataCat.data);
-    //     callback(dataLocalStorage);
-    // }
-    // getDataForLocalStorage(overwritingLocalStorage);
-
-
-    
-});
-
-// функция удаления карточки кота
-function deleteFormCat() {
-    api.getAllCats().then(dataCat => {
-        dataCat.data.forEach((item) => {
-            if (popupCatId.textContent == item.id) {
-                api.deleteCat(popupCatId.textContent);  
-            }
-        });
-        localStorage.clear();
-        setLocalStorage("cats", dataCat.data);
-    });
 }
-
-
-
-closePopupCats.addEventListener("click", closePopup);
-btnOverwritingLocalStorage.addEventListener("click", overwritingLocalStorage);
-btnAddCat.addEventListener("click", handleClickButtonAddCat);
-btnDeleteCat.addEventListener("click", deleteFormCat);
+/* <a target="_blank" href="https://icons8.ruundefined">Корзина</a> иконка от <a target="_blank" href="https://icons8.ru">Icons8</a> */ 
