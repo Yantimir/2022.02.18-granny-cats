@@ -134,10 +134,13 @@ function getEveryCats() {
 
 /* =====  функция удаления карточки кота ======================================*/
 function deleteFormCat() {
-    api.deleteCat(popupCatId.textContent);
-    // newCatCard.remove();
-    overwritingLocalStorage();
-    closePopup();
+    let result = confirm("Вы действительно хотите удалить котика?");
+    if (result) {
+        api.deleteCat(popupCatId.textContent);
+        // newCatCard.remove();
+        overwritingLocalStorage();
+        closePopup();
+    }
 }
 
 wrapperPopup.addEventListener("click", handleClickCloseBtn);
@@ -155,4 +158,3 @@ if (!localStorage.getItem("cats")) {
         createCardToMainCard(newCat, mainCard);
     });
 }
-/* <a target="_blank" href="https://icons8.ruundefined">Корзина</a> иконка от <a target="_blank" href="https://icons8.ru">Icons8</a> */ 

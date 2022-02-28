@@ -9,7 +9,6 @@ img{
 }
 input{
     display: block;
-    margin: 40px;
     height: 60px;
     width: 400px;
     padding-left: 20px;
@@ -163,6 +162,7 @@ header {
     height: 300px;
     background: center / cover no-repeat;
     object-fit: cover;
+    border-radius: 10px;
 }
 .popup__title{
     margin-left: 20px;
@@ -189,7 +189,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 .popup__change-form__send-button{
     display: inline-block;
@@ -207,16 +207,26 @@ header {
     width: 30px;
     height: 30px;
 } */
+.popup__add-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.popup__add-form__input{
+    margin: 0 0 20px 0;
+}
 .popup__add-form__input:nth-child(1){
     margin-top: 70px;
 }
 .popup__add-form__button{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .popup__add-form__send-button{
-    margin: 0 40px 30px ;
-    width: 407px;
+    margin: 0 0 10px 0;
+    width: 420px;
     text-transform: uppercase;
     letter-spacing: 2px;
 }

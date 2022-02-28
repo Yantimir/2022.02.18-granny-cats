@@ -2,10 +2,7 @@ const onError = (response) => {
     if (response.ok) {
         return response.json()
     }
-    return Promise.reject({
-        message: 'Сервер не доступен',
-        error: response
-    })
+    return alert("Ошибка сервера, либо сервер не доступен");
 }
 
 class Api {
