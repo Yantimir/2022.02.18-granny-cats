@@ -79,18 +79,13 @@
         </div>
         <div class="popup popup_add_cat-info">
             <div class="popup__container">
-                <form class="popup__add-form" name="add-form">
-                    <input class="popup__add-form__input" type="text" name="add-id" placeholder="Введите id котика">
-                    <input class="popup__add-form__input" type="text" name="add-name" placeholder="Введите имя котика">
-                    <input class="popup__add-form__input" type="text" name="add-age"
-                        placeholder="Введите возраст котика">
-                    <!-- <input class="popup__add-form__input" type="text" name="add-rate"
-                        placeholder="Введите рейтинг котика < 10"> -->
-                    <input class="popup__add-form__input" type="number" name="add-rate" placeholder="Введите рейтинг котика"  min="0" max="10" >
-                    <input class="popup__add-form__input" type="url" name="add-description"
-                    placeholder="Введите URL котика">
-                    <input class="popup__add-form__input" type="text" name="add-description"
-                        placeholder="Введите информацию о котике">
+                <form class="popup__add-form">
+                    <input id="add-id" class="popup__add-form__input" type="text" name="id" placeholder="Введите id котика">
+                    <input id="add-name" class="popup__add-form__input" type="text" name="name" placeholder="Введите имя котика">
+                    <input id="add-age" class="popup__add-form__input" type="text" name="age" placeholder="Введите возраст котика">
+                    <input id="add-rate" class="popup__add-form__input" type="number" name="rate" placeholder="Введите рейтинг котика" min="0" max="10">
+                    <input id="add-img_link" class="popup__add-form__input" type="text" name="img_link" placeholder="Введите URL котика">
+                    <input id="add-description" class="popup__add-form__input" type="text" name="description" placeholder="Введите информацию о котике">
                     <div class="popup__add-form__button">
                         <button class="button popup__add-form__send-button" type="submit">Отправить</button>
                     </div>
@@ -111,7 +106,7 @@
                 <p class="cat-rating"></p>
                 <p class="cat-id"></p>
             </div>
-        </div><button class="button popup__add-form__send-button" type="button"></button>
+        </div>
     </template>
 
     <script src="./js/Api.js" defer></script>

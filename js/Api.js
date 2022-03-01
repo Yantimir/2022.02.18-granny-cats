@@ -2,7 +2,11 @@ const onError = (response) => {
     if (response.ok) {
         return response.json()
     }
-    return alert("Ошибка сервера, либо сервер не доступен");
+    return Promise.reject({
+        message: 'Сервер не доступен',
+        error: response
+    })
+    // return alert("Ошибка сервера, либо сервер не доступен");
 }
 
 class Api {
@@ -52,7 +56,7 @@ const api = new Api({
     url: 'https://sb-cats.herokuapp.com/api',
     headers: {
         "Content-type": "application/json",
-        "Accept": "application/json"
+        // "Accept": "application/json"
     }
 })
 
