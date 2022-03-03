@@ -11,24 +11,29 @@ const popupCats = wrapperPopup.querySelector(".popup_type_cats-info");
 const popupCatImage = wrapperPopup.querySelector(".popup__cat-img");
 const popupCatName = wrapperPopup.querySelector(".popup__cat-name");
 const popupCatAge = wrapperPopup.querySelector(".popup__cat-age");
+const popupCatRating = wrapperPopup.querySelector("cat-rating");
 const popupCatDescription = wrapperPopup.querySelector(".popup__cat-description");
 const popupCatId = wrapperPopup.querySelector(".popup__cat-id");
 
 const closePopupCat = wrapperPopup.querySelector(".popup__img-close");
 
-const popupAddCat = document.querySelector(".popup_add_cat-info");
+const popupAddCat = wrapperPopup.querySelector(".popup_add_cat-info");
 const popupAddForm = popupAddCat.querySelector(".popup__add-form");
-const inputAddId = popupAddCat.querySelector("#add-id");
-const inputAddName = popupAddCat.querySelector("#add-name");
-const inputAddAge = popupAddCat.querySelector("#add-age");
-const inputAddRate = popupAddCat.querySelector("#add-rate");
-const inputAddImgLink = popupAddCat.querySelector("#add-img_link");
-const inputAddDescription = popupAddCat.querySelector("#add-description");
 
-const btnOverwritingLocalStorage = document.querySelector(".button-overwriting-local-storage");
+const popupEditCat = wrapperPopup.querySelector(".popup_edit_cat-info");
+const popupEditForm = wrapperPopup.querySelector(".popup__edit-form");
+const popupEditNameCat = wrapperPopup.querySelector("#edit-name");
+const popupEditAgeCat = wrapperPopup.querySelector("#edit-age");
+const popupEditRateCat = wrapperPopup.querySelector("#edit-rate");
+const popupEditImgCat = wrapperPopup.querySelector("#edit-img_link");
+const popupEditDescriptionCat = wrapperPopup.querySelector("#edit-description");
+
 const btnAddCat = document.querySelector(".button-add-cat");
-const btnSendCat = popupAddCat.querySelector(".popup__add-form__send-button");
-const btnDeleteCat = document.querySelector(".popup__delete-form__send-button");
+const btnOverwritingLocalStorage = document.querySelector(".button-overwriting-local-storage");
+
+const btnChangeCat = wrapperPopup.querySelector(".popup__change-form__send-button");
+const btnEditCat = wrapperPopup.querySelector(".popup__edit-form__send-button");
+const btnDeleteCat = wrapperPopup.querySelector(".popup__delete-form__send-button");
 
 /* ====== show REATING ========================================================== */
 function showRating(number) {
@@ -71,7 +76,7 @@ function handleClickBtnAddCat() {
 
 function handleClickBtnSendCat(dataCat) {
     const inputs = popupAddForm.querySelectorAll("input");
-    inputs. forEach(input => {
+    inputs.forEach(input => {
         input.value = dataCat[input.name]
     });
 }
@@ -84,13 +89,11 @@ function handleClickCloseBtn(e) {
 
 /* ===== функция template клон карточки =========================================*/
 function createCardCat(dataCat) {
-    const newCatCard = templateCat.content
-        .querySelector(".card__item")
-        .cloneNode(true);
+    const newCatCard = templateCat.content.querySelector(".card__item").cloneNode(true);
     const nameCatCard = newCatCard.querySelector("h3"); // имя кота
     const imgCatCard = newCatCard.querySelector(".card__img"); // фото кота
     const ratingCatCard = newCatCard.querySelector(".cat-rating"); // рейтинг кота
-    // получение фрагмента
+    // ------------------получение фрагмента--------------------------------------
     // имя кота
     nameCatCard.textContent = dataCat.name;
     // фото кота
@@ -99,23 +102,37 @@ function createCardCat(dataCat) {
     ratingCatCard.innerHTML = showRating(dataCat.rate);
 
     function handleClickCatImage() {
-        popupCatName.innerHTML = dataCat.name;
+        popupCatName.textContent = dataCat.name;
         popupCatImage.src = dataCat.img_link;
         popupCatAge.textContent = dataCat.age + " лет";
+        ratingCatCard.textContent = dataCat.rate;
         popupCatDescription.textContent = dataCat.description;
         popupCatId.textContent = dataCat.id;
         openPopup(popupCats);
     }
+
+    function handleClickBtnChangeCat(e){
+        if (e.target.classList.contains("popup__change-form__send-button")) {
+            closePopup();
+            openPopup(popupEditCat);
+            const inputs = popupEditForm.querySelectorAll(".popup__edit-form__input");
+            inputs.forEach((input)=> {
+                input.value = dataCat[input.name];
+            });
+        }
+    }
+    btnChangeCat.addEventListener("click", handleClickBtnChangeCat);
     newCatCard.addEventListener("click", handleClickCatImage);
 
     return newCatCard;
 }
+
 // функция добавления карточки
 function createCardToMainCard(elementNode, container) {
     container.append(elementNode);
 }
 
-/* ====== localStorage ========================================================== */
+/* ====== localStorage ========================================================*/
 // функция записи localStorage
 function setLocalStorage(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
@@ -133,7 +150,7 @@ function overwritingLocalStorage() {
     getEveryCats();
 }
 
-/* ===== данные в карточку =====================================================*/
+/* ===== получение всех котиков ==============================================*/
 function getEveryCats() {
     api.getAllCats().then(({ data }) => {
         // set localStorage
@@ -146,57 +163,62 @@ function getEveryCats() {
     });
 }
 
-/* =====  функция удаления карточки кота ======================================*/
+/* ===== функция удаления карточки кота ======================================*/
 function deleteFormCat() {
     let result = confirm("Вы действительно хотите удалить котика?");
     if (result) {
         api.deleteCat(popupCatId.textContent);
         overwritingLocalStorage();
-        getEveryCats();
         closePopup();
     }
 }
 
-/* =====  функция добавления карточки кота ====================================*/
-function createFormData(form) {
+/* ===== данные формы нового котика ==========================================*/
+function createFormData(form, className) {
     const sendObject = {};
-    const inputForm = form.querySelectorAll("input");
+    const inputForm = form.querySelectorAll(`.${className}`);
     inputForm.forEach((input) => {
         sendObject[input.name] = input.value;
     });
     return sendObject;
 }
 
+
+/* ===== добавление нового котика ============================================*/
 function sendNewCat(e) {
     e.preventDefault();
-    const bodyData = createFormData(popupAddForm);
-    //   const bodyData = {
-    //     id: inputAddId.value,
-    //     name: inputAddName.value,
-    //     age: inputAddAge.value,
-    //     rate: inputAddRate.value,
-    //     img_link: inputAddImgLink.value,
-    //     description: inputAddDescription.value,
-    //   };
+    const bodyData = createFormData(popupAddForm, "popup__add-form__input");
     api.addCat(bodyData);
     overwritingLocalStorage();
-    getEveryCats();
     closePopup();
 }
 
-wrapperPopup.addEventListener("click", handleClickCloseBtn);
+// function editCat(e) {
+//     e.preventDefault();
+//     api.updateCat(value, bodyData);
+//     overwritingLocalStorage();
+//     closePopup();
+// }
+
+
 btnOverwritingLocalStorage.addEventListener("click", overwritingLocalStorage);
+
+wrapperPopup.addEventListener("click", handleClickCloseBtn);
+
 btnAddCat.addEventListener("click", handleClickBtnAddCat);
 popupAddForm.addEventListener("submit", sendNewCat);
+
 btnDeleteCat.addEventListener("click", deleteFormCat);
 
-// if (localStorage.getItem("cats")) {
-//     let getDataLocalStorage = getLocalStorage("cats");
-//     getDataLocalStorage.forEach((item) => {
-//         const newCat = createCardCat(item);
-//         createCardToMainCard(newCat, mainCard);
-//     });
-// } else {
-//     getEveryCats();
-// }
-getEveryCats();
+// popupEditForm.addEventListener("submit", editCat);
+
+if (localStorage.getItem("cats")) {
+    let getDataLocalStorage = getLocalStorage("cats");
+    getDataLocalStorage.forEach((item) => {
+        const newCat = createCardCat(item);
+        createCardToMainCard(newCat, mainCard);
+    });
+} else {
+    getEveryCats();
+}
+// getEveryCats();

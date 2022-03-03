@@ -181,9 +181,9 @@ header {
     width: 350px;
 }
 .popup__cat-id{
-    /* display: none; */
-    margin-top: 0;
-    margin-bottom: 10px;
+    display: none;
+    /* margin-top: 0;
+    margin-bottom: 10px; */
 }
 .popup__button{
     display: flex;
@@ -197,16 +197,23 @@ header {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+.popup__edit-form__input{
+    margin: 0 0 20px 0;
+}
+.popup__edit-form__input:nth-child(1){
+    margin-top: 70px;
+}
+.popup__edit-form__send-button{
+    margin: 0;
+    width: 420px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
 .popup__delete-form__send-button{
     width: 300px;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
-/* .basket{
-    margin-left: 10px;
-    width: 30px;
-    height: 30px;
-} */
 .popup__add-form{
     display: flex;
     flex-direction: column;

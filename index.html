@@ -56,36 +56,43 @@
 
     <!-- POPUP CATS ---------------------------------------------------->
     <div class="wrapper__popup">
+
         <div class="popup popup_type_cats-info">
             <div class="popup__container">
                 <div class="popup__content">
                     <div class="popup__picture">
-                        <img class="popup__cat-img" alt="котик">
+                        <img class="content popup__cat-img" name="img_link" alt="котик">
                     </div>
                     <div class="popup__title">
-                        <h2 class="popup__cat-name"></h2>
-                        <h3 class="popup__cat-age"></h3>
-                        <p class="popup__cat-description"></p>
-                        <p class="popup__cat-id"></p>
+                        <h2 class="content popup__cat-name" name="name"></h2>
+                        <h3 class="content popup__cat-age" name="age"></h3>
+                        <p class="content popup__cat-description" name="description"></p>
+                        <p class="content popup__cat-id" name="id"></p>
                     </div>
                 </div>
                 <div class="popup__button">
                     <button class="button popup__change-form__send-button" type="submit">Изменить</button>
-                    <!-- <button class="button popup__delete-form__send-button" type="submit">Удалить<img class="basket" src="img/icons8-64.png" alt="корзина"></button> -->
                     <button class="button popup__delete-form__send-button" type="submit">Удалить</button>
                 </div>
                 <div class="popup__img-close"></div>
             </div>
         </div>
+
         <div class="popup popup_add_cat-info">
             <div class="popup__container">
                 <form class="popup__add-form">
-                    <input id="add-id" class="popup__add-form__input" type="text" name="id" placeholder="Введите id котика">
-                    <input id="add-name" class="popup__add-form__input" type="text" name="name" placeholder="Введите имя котика">
-                    <input id="add-age" class="popup__add-form__input" type="text" name="age" placeholder="Введите возраст котика">
-                    <input id="add-rate" class="popup__add-form__input" type="number" name="rate" placeholder="Введите рейтинг котика" min="0" max="10">
-                    <input id="add-img_link" class="popup__add-form__input" type="text" name="img_link" placeholder="Введите URL котика">
-                    <input id="add-description" class="popup__add-form__input" type="text" name="description" placeholder="Введите информацию о котике">
+                    <input id="add-id" class="popup__add-form__input" type="text" name="id"
+                        placeholder="Введите id котика">
+                    <input id="add-name" class="popup__add-form__input" type="text" name="name"
+                        placeholder="Введите имя котика">
+                    <input id="add-age" class="popup__add-form__input" type="text" name="age"
+                        placeholder="Введите возраст котика">
+                    <input id="add-rate" class="popup__add-form__input" type="number" name="rate"
+                        placeholder="Введите рейтинг котика" min="0" max="10">
+                    <input id="add-img_link" class="popup__add-form__input" type="text" name="img_link"
+                        placeholder="Введите URL картинки котика">
+                    <input id="add-description" class="popup__add-form__input" type="text" name="description"
+                        placeholder="Введите информацию о котике">
                     <div class="popup__add-form__button">
                         <button class="button popup__add-form__send-button" type="submit">Отправить</button>
                     </div>
@@ -93,6 +100,30 @@
                 <div class="popup__img-close"></div>
             </div>
         </div>
+
+        <div class="popup popup_edit_cat-info">
+            <div class="popup__container">
+                <form class="popup__edit-form">
+                    <input id="edit-id" class="popup__edit-form__input" type="text" name="id" disabled="disabled">
+                    <input id="edit-name" class="popup__edit-form__input" type="text" name="name"
+                        placeholder="Введите новое имя котика">
+                    <input id="edit-age" class="popup__edit-form__input" type="text" name="age"
+                        placeholder="Введите новый возраст котика">
+                    <input id="edit-rate" class="popup__edit-form__input" type="number" name="rate"
+                        placeholder="Введите новый рейтинг котика" min="0" max="10">
+                    <input id="edit-img_link" class="popup__edit-form__input" type="text" name="img_link"
+                        placeholder="Введите новый URL картинки котика">
+                    <input id="edit-description" class="popup__edit-form__input" type="text" name="description"
+                        placeholder="Введите новую информацию о котике">
+                </form>
+                <div class="popup__edit-form__button">
+                    <button class="button popup__edit-form__send-button" type="submit">Отправить</button>
+                </div>
+
+                <div class="popup__img-close"></div>
+            </div>
+        </div>
+
     </div>
 
     <!-- /popup cats --------------------------------------------------->
