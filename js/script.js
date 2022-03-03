@@ -21,12 +21,12 @@ const popupAddCat = wrapperPopup.querySelector(".popup_add_cat-info");
 const popupAddForm = popupAddCat.querySelector(".popup__add-form");
 
 const popupEditCat = wrapperPopup.querySelector(".popup_edit_cat-info");
-const popupEditForm = wrapperPopup.querySelector(".popup__edit-form");
-const popupEditNameCat = wrapperPopup.querySelector("#edit-name");
-const popupEditAgeCat = wrapperPopup.querySelector("#edit-age");
-const popupEditRateCat = wrapperPopup.querySelector("#edit-rate");
-const popupEditImgCat = wrapperPopup.querySelector("#edit-img_link");
-const popupEditDescriptionCat = wrapperPopup.querySelector("#edit-description");
+const popupEditForm = popupEditCat.querySelector(".popup__edit-form");
+// const popupEditNameCat = wrapperPopup.querySelector("#edit-name");
+// const popupEditAgeCat = wrapperPopup.querySelector("#edit-age");
+// const popupEditRateCat = wrapperPopup.querySelector("#edit-rate");
+// const popupEditImgCat = wrapperPopup.querySelector("#edit-img_link");
+// const popupEditDescriptionCat = wrapperPopup.querySelector("#edit-description");
 
 const btnAddCat = document.querySelector(".button-add-cat");
 const btnOverwritingLocalStorage = document.querySelector(".button-overwriting-local-storage");
@@ -94,11 +94,8 @@ function createCardCat(dataCat) {
     const imgCatCard = newCatCard.querySelector(".card__img"); // фото кота
     const ratingCatCard = newCatCard.querySelector(".cat-rating"); // рейтинг кота
     // ------------------получение фрагмента--------------------------------------
-    // имя кота
     nameCatCard.textContent = dataCat.name;
-    // фото кота
     imgCatCard.style.backgroundImage = `url(${dataCat.img_link})`;
-    // рейтинг кота
     ratingCatCard.innerHTML = showRating(dataCat.rate);
 
     function handleClickCatImage() {
@@ -111,16 +108,29 @@ function createCardCat(dataCat) {
         openPopup(popupCats);
     }
 
-    function handleClickBtnChangeCat(e){
+    function handleClickBtnChangeCat(e) {
         if (e.target.classList.contains("popup__change-form__send-button")) {
             closePopup();
-            openPopup(popupEditCat);
             const inputs = popupEditForm.querySelectorAll(".popup__edit-form__input");
-            inputs.forEach((input)=> {
-                input.value = dataCat[input.name];
+            inputs.forEach((input) => {
+                if (popupCatId.textContent == dataCat.id) {
+                    input.value = dataCat[input.name];
+                }
             });
+            openPopup(popupEditCat);
         }
     }
+
+    function editCat(e) {
+        e.preventDefault();
+        const bodyData = createFormData(popupAddForm, "popup__edit-form__input");
+        console.log(bodyData);
+        // api.updateCat(value, bodyData);
+        // overwritingLocalStorage();
+        // closePopup();
+    }
+    popupEditForm.addEventListener("submit", editCat);
+
     btnChangeCat.addEventListener("click", handleClickBtnChangeCat);
     newCatCard.addEventListener("click", handleClickCatImage);
 
@@ -153,7 +163,6 @@ function overwritingLocalStorage() {
 /* ===== получение всех котиков ==============================================*/
 function getEveryCats() {
     api.getAllCats().then(({ data }) => {
-        // set localStorage
         setLocalStorage("cats", data);
         // templateCardCat
         data.forEach((item) => {
@@ -183,7 +192,6 @@ function createFormData(form, className) {
     return sendObject;
 }
 
-
 /* ===== добавление нового котика ============================================*/
 function sendNewCat(e) {
     e.preventDefault();
@@ -199,18 +207,13 @@ function sendNewCat(e) {
 //     overwritingLocalStorage();
 //     closePopup();
 // }
-
+// popupEditForm.addEventListener("submit", editCat);
 
 btnOverwritingLocalStorage.addEventListener("click", overwritingLocalStorage);
-
 wrapperPopup.addEventListener("click", handleClickCloseBtn);
-
 btnAddCat.addEventListener("click", handleClickBtnAddCat);
 popupAddForm.addEventListener("submit", sendNewCat);
-
 btnDeleteCat.addEventListener("click", deleteFormCat);
-
-// popupEditForm.addEventListener("submit", editCat);
 
 if (localStorage.getItem("cats")) {
     let getDataLocalStorage = getLocalStorage("cats");

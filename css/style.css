@@ -197,13 +197,13 @@ header {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
-.popup__edit-form__input{
+.popup__edit-form__input, .popup__add-form__input{
     margin: 0 0 20px 0;
 }
-.popup__edit-form__input:nth-child(1){
+.popup__edit-form__input:nth-child(1), .popup__add-form__input:nth-child(1){
     margin-top: 70px;
 }
-.popup__edit-form__send-button{
+.popup__edit-form__send-button, .popup__add-form__send-button{
     margin: 0;
     width: 420px;
     text-transform: uppercase;
@@ -214,29 +214,7 @@ header {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
-.popup__add-form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.popup__add-form__input{
-    margin: 0 0 20px 0;
-}
-.popup__add-form__input:nth-child(1){
-    margin-top: 70px;
-}
-.popup__add-form__button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.popup__add-form__send-button{
-    margin: 0 0 10px 0;
-    width: 420px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
+
 /* ======= FOOTER ======= */
 .footer .container{
     height: 100px;
