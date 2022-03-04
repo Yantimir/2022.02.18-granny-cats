@@ -19,20 +19,15 @@ const closePopupCat = wrapperPopup.querySelector(".popup__img-close");
 
 const popupAddCat = wrapperPopup.querySelector(".popup_add_cat-info");
 const popupAddForm = popupAddCat.querySelector(".popup__add-form");
+const popupAddIdCat = popupAddCat.querySelector("#add-id");
+const btnAddCat = document.querySelector(".button-add-cat");
 
 const popupEditCat = wrapperPopup.querySelector(".popup_edit_cat-info");
 const popupEditForm = popupEditCat.querySelector(".popup__edit-form");
-// const popupEditNameCat = wrapperPopup.querySelector("#edit-name");
-// const popupEditAgeCat = wrapperPopup.querySelector("#edit-age");
-// const popupEditRateCat = wrapperPopup.querySelector("#edit-rate");
-// const popupEditImgCat = wrapperPopup.querySelector("#edit-img_link");
-// const popupEditDescriptionCat = wrapperPopup.querySelector("#edit-description");
-
-const btnAddCat = document.querySelector(".button-add-cat");
-const btnOverwritingLocalStorage = document.querySelector(".button-overwriting-local-storage");
-
-const btnChangeCat = wrapperPopup.querySelector(".popup__change-form__send-button");
 const btnEditCat = wrapperPopup.querySelector(".popup__edit-form__send-button");
+
+const btnOverwritingLocalStorage = document.querySelector(".button-overwriting-local-storage");
+const btnChangeCat = wrapperPopup.querySelector(".popup__change-form__send-button");
 const btnDeleteCat = wrapperPopup.querySelector(".popup__delete-form__send-button");
 
 /* ====== show REATING ========================================================== */
@@ -81,6 +76,12 @@ function handleClickBtnSendCat(dataCat) {
     });
 }
 
+// function handleClickBtnEditCat(e) {
+//     e.preventDefault();
+//     const bodyData = createFormData(popupAddForm, "popup__edit-form__input");
+//     console.log(bodyData);
+// }
+// popupEditForm.addEventListener("submit", handleClickBtnEditCat);
 function handleClickCloseBtn(e) {
     if (e.target.classList.contains("popup__img-close")) {
         closePopup();
@@ -107,30 +108,19 @@ function createCardCat(dataCat) {
         popupCatId.textContent = dataCat.id;
         openPopup(popupCats);
     }
-
+    // кнопка изменить кота
     function handleClickBtnChangeCat(e) {
         if (e.target.classList.contains("popup__change-form__send-button")) {
             closePopup();
+            openPopup(popupEditCat);
             const inputs = popupEditForm.querySelectorAll(".popup__edit-form__input");
             inputs.forEach((input) => {
                 if (popupCatId.textContent == dataCat.id) {
                     input.value = dataCat[input.name];
                 }
             });
-            openPopup(popupEditCat);
         }
     }
-
-    function editCat(e) {
-        e.preventDefault();
-        const bodyData = createFormData(popupAddForm, "popup__edit-form__input");
-        console.log(bodyData);
-        // api.updateCat(value, bodyData);
-        // overwritingLocalStorage();
-        // closePopup();
-    }
-    popupEditForm.addEventListener("submit", editCat);
-
     btnChangeCat.addEventListener("click", handleClickBtnChangeCat);
     newCatCard.addEventListener("click", handleClickCatImage);
 
@@ -200,14 +190,16 @@ function sendNewCat(e) {
     overwritingLocalStorage();
     closePopup();
 }
-
-// function editCat(e) {
-//     e.preventDefault();
-//     api.updateCat(value, bodyData);
-//     overwritingLocalStorage();
-//     closePopup();
-// }
-// popupEditForm.addEventListener("submit", editCat);
+/* ===== редактирование котика ===============================================*/
+function editCat(e) {
+    e.preventDefault();
+    const bodyData = createFormData(popupEditForm, "popup__edit-form__input");
+    api.updateCat(bodyData.id, bodyData);
+    overwritingLocalStorage();
+    closePopup();
+}
+// btnEditCat.addEventListener("click", editCat);
+popupEditForm.addEventListener("submit", editCat);
 
 btnOverwritingLocalStorage.addEventListener("click", overwritingLocalStorage);
 wrapperPopup.addEventListener("click", handleClickCloseBtn);
