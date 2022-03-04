@@ -11,7 +11,7 @@ const popupCats = wrapperPopup.querySelector(".popup_type_cats-info");
 const popupCatImage = wrapperPopup.querySelector(".popup__cat-img");
 const popupCatName = wrapperPopup.querySelector(".popup__cat-name");
 const popupCatAge = wrapperPopup.querySelector(".popup__cat-age");
-const popupCatRating = wrapperPopup.querySelector("cat-rating");
+const popupCatRating = wrapperPopup.querySelector(".popup__cat-rating");
 const popupCatDescription = wrapperPopup.querySelector(".popup__cat-description");
 const popupCatId = wrapperPopup.querySelector(".popup__cat-id");
 
@@ -76,12 +76,6 @@ function handleClickBtnSendCat(dataCat) {
     });
 }
 
-// function handleClickBtnEditCat(e) {
-//     e.preventDefault();
-//     const bodyData = createFormData(popupAddForm, "popup__edit-form__input");
-//     console.log(bodyData);
-// }
-// popupEditForm.addEventListener("submit", handleClickBtnEditCat);
 function handleClickCloseBtn(e) {
     if (e.target.classList.contains("popup__img-close")) {
         closePopup();
@@ -103,7 +97,7 @@ function createCardCat(dataCat) {
         popupCatName.textContent = dataCat.name;
         popupCatImage.src = dataCat.img_link;
         popupCatAge.textContent = dataCat.age + " лет";
-        ratingCatCard.textContent = dataCat.rate;
+        popupCatRating.innerHTML = showRating(dataCat.rate);
         popupCatDescription.textContent = dataCat.description;
         popupCatId.textContent = dataCat.id;
         openPopup(popupCats);
@@ -198,14 +192,13 @@ function editCat(e) {
     overwritingLocalStorage();
     closePopup();
 }
-// btnEditCat.addEventListener("click", editCat);
-popupEditForm.addEventListener("submit", editCat);
 
-btnOverwritingLocalStorage.addEventListener("click", overwritingLocalStorage);
 wrapperPopup.addEventListener("click", handleClickCloseBtn);
-btnAddCat.addEventListener("click", handleClickBtnAddCat);
 popupAddForm.addEventListener("submit", sendNewCat);
+popupEditForm.addEventListener("submit", editCat);
+btnAddCat.addEventListener("click", handleClickBtnAddCat);
 btnDeleteCat.addEventListener("click", deleteFormCat);
+btnOverwritingLocalStorage.addEventListener("click", overwritingLocalStorage);
 
 if (localStorage.getItem("cats")) {
     let getDataLocalStorage = getLocalStorage("cats");

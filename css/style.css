@@ -176,6 +176,9 @@ header {
     margin-top: 0;
     margin-bottom: 10px;
 }
+.popup__cat-rating img {
+    height: 15px;
+}
 .popup__cat-description{
     margin-top: 0;
     width: 350px;
