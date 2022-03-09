@@ -228,3 +228,96 @@ header {
     margin: 0;
 }
 
+/*1024 
+=============================*/
+@media (max-width: 992px) {
+    .control{
+        margin-top: 30px;
+    }
+    input{
+        height: 40px;
+    }
+    .card__item {   
+        margin: 15px;
+    }
+    .main__card{
+        padding-top: 15px;
+    }
+    .popup__container{
+        padding: 15px;
+    }
+    .popup__add-form, .popup__edit-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .popup__content{
+        display: flex;
+        flex-direction: column;
+    }
+    .popup__img-close{
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+    }
+    .popup__cat-img{
+        width: 400px;
+        height: 200px;
+        margin-top: 45px;
+    }
+    .popup__cat-name {
+        font-size: 28px;
+    }
+    .popup__cat-age{
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+    .popup__cat-rating img {
+        margin: 0;
+        height: 15px;
+    }
+    .button{
+        height: 40px;
+        margin: 0 30px;
+        padding: 0 15px;
+        font-size: 14px;
+    }
+    .popup__button{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0;
+    }
+    .popup__change-form__send-button{
+        display: inline-block;
+        width: 300px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .popup__delete-form__send-button{
+        margin-top: 15px;
+    }
+    .popup__edit-form__input, .popup__add-form__input{
+        margin: 0 0 15px 0;
+    }
+    .popup__edit-form__input:nth-child(1), .popup__add-form__input:nth-child(1){
+        margin-top: 50px;
+    }
+    /* ======= FOOTER ======= */
+    .footer .container{
+        height: 100px;
+        box-shadow:  0 0 5px 0 rgba(0, 0, 0, 0.4);
+    }
+    .footer p {
+        padding: 40px 0 40px 30px;
+        margin: 0;
+    }
+}
+
+/* @media (max-width: 320px) {
+
+} */

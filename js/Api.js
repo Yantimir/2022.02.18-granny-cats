@@ -18,11 +18,13 @@ class Api {
     getAllCats() {
         return fetch(`${this._url}/show`)
             .then(onError)
+            .catch(alert("Что-то пошло не по плану!"))
     }
 
     getCatById(value) {
         return fetch(`${this._url}/show/${value}`)
             .then(onError)
+            .catch(alert("Что-то пошло не по плану!"))
     }
 
     addCat(bodyData) {
@@ -32,6 +34,7 @@ class Api {
             body: JSON.stringify(bodyData)
         })
             .then(onError)
+            .catch(alert("Что-то пошло не по плану!"))
     }
 
     updateCat(value, bodyData) {
@@ -41,6 +44,7 @@ class Api {
             body: JSON.stringify(bodyData)
         })
             .then(onError)
+            .catch(alert("Что-то пошло не по плану!"))
     }
 
     deleteCat(value) {
@@ -49,6 +53,7 @@ class Api {
             headers: this._headers,
         })
             .then(onError)
+            .catch(alert("Что-то пошло не по плану!"))
     }
 }
 

@@ -160,8 +160,9 @@ function getEveryCats() {
 function deleteFormCat() {
     let result = confirm("Вы действительно хотите удалить котика?");
     if (result) {
-        api.deleteCat(popupCatId.textContent);
-        overwritingLocalStorage();
+        api.deleteCat(popupCatId.textContent).then(() => {
+            overwritingLocalStorage();
+        });
         closePopup();
     }
 }
@@ -180,16 +181,18 @@ function createFormData(form, className) {
 function sendNewCat(e) {
     e.preventDefault();
     const bodyData = createFormData(popupAddForm, "popup__add-form__input");
-    api.addCat(bodyData);
-    overwritingLocalStorage();
+    api.addCat(bodyData).then(() => {
+        overwritingLocalStorage();
+    });
     closePopup();
 }
 /* ===== редактирование котика ===============================================*/
 function editCat(e) {
     e.preventDefault();
     const bodyData = createFormData(popupEditForm, "popup__edit-form__input");
-    api.updateCat(bodyData.id, bodyData);
-    overwritingLocalStorage();
+    api.updateCat(bodyData.id, bodyData).then(() => {
+        overwritingLocalStorage();
+    });
     closePopup();
 }
 
