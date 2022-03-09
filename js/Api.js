@@ -6,7 +6,6 @@ const onError = (response) => {
         message: 'Сервер не доступен',
         error: response
     })
-    // return alert("Ошибка сервера, либо сервер не доступен");
 }
 
 class Api {
