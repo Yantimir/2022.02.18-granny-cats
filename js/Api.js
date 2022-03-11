@@ -4,7 +4,7 @@ const onError = (response) => {
     }
     return Promise.reject({
         message: 'Сервер не доступен',
-        error: response
+        error: response, 
     })
 }
 
@@ -17,13 +17,13 @@ class Api {
     getAllCats() {
         return fetch(`${this._url}/show`)
             .then(onError)
-            .catch(alert("Что-то пошло не по плану!"))
+            .catch((e) => alert("Что-то пошло не так!"))
     }
 
     getCatById(value) {
         return fetch(`${this._url}/show/${value}`)
             .then(onError)
-            .catch(alert("Что-то пошло не по плану!"))
+            .catch((e) => alert("Что-то пошло не так!"))
     }
 
     addCat(bodyData) {
@@ -33,7 +33,7 @@ class Api {
             body: JSON.stringify(bodyData)
         })
             .then(onError)
-            .catch(alert("Что-то пошло не по плану!"))
+            .catch((e) => alert("Что-то пошло не так!"))
     }
 
     updateCat(value, bodyData) {
@@ -43,7 +43,7 @@ class Api {
             body: JSON.stringify(bodyData)
         })
             .then(onError)
-            .catch(alert("Что-то пошло не по плану!"))
+            .catch((e) => alert("Что-то пошло не так!"))
     }
 
     deleteCat(value) {
@@ -52,7 +52,8 @@ class Api {
             headers: this._headers,
         })
             .then(onError)
-            .catch(alert("Что-то пошло не по плану!"))
+            .catch((e) => alert("Что-то пошло не так!"))
+
     }
 }
 
